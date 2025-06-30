@@ -1,0 +1,14 @@
+#pragma kernel CSMain
+
+RWStructuredBuffer<float3> positions;
+float time;
+
+[numthreads(64, 1, 1)]
+void CSMain(uint id : SV_DispatchThreadID)
+{
+    positions[id] += float3(
+        sin(time + id) * 0.1,
+        cos(time * 1.5 + id * 2) * 0.1,
+        cos(time + id) * 0.1
+    );
+}
